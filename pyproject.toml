@@ -1,0 +1,29 @@
+[project]
+name = "marketing_digital"
+version = "0.1.0"
+description = "Sistema multiagente com CrewAI para inteligência de marketing digital, análise de dados de funil em SQLite, copywriting e estratégia de mídia paga."
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[google-genai,tools]==1.14.4",
+    "langchain>=1.4.0",
+    "langchain-community>=0.4.2",
+    "langchain-ollama>=1.1.0",
+    "matplotlib>=3.10.9",
+    "seaborn>=0.13.2",
+    "sqlalchemy>=2.0.52",
+]
+
+[project.scripts]
+marketing_digital = "marketing_digital.main:run"
+run_crew = "marketing_digital.main:run"
+train = "marketing_digital.main:train"
+replay = "marketing_digital.main:replay"
+test = "marketing_digital.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"

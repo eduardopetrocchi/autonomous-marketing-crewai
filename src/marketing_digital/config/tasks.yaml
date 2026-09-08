@@ -1,0 +1,85 @@
+analise_estrategica_funil:
+  description: >
+    Analise o comportamento do público-alvo para {produto_ou_servico} dentro do
+    contexto de {nicho_ou_mercado}, considerando o objetivo de campanha: {objetivo_campanha}.
+    Utilize obrigatoriamente as ferramentas disponíveis ("consultar_schema" e "executar_query_sql") para extrair métricas reais
+    do banco de dados do e-commerce (referente ao período: {periodo_analise}),
+    cruzando informações de tráfego (website_sessions, website_daily), vendas
+    (orders, order_line_items, sku_catalog), estoque (inventory_snapshots,
+    purchase_orders) e anúncios (meta_ads_campaigns) sempre que relevante para a
+    análise. Mapeie as etapas do funil (topo, meio e fundo) com base nesses dados,
+    identifique os principais pontos de atrito e abandono, e levante as dores,
+    desejos e objeções mais relevantes do avatar de cliente. Sempre que citar um
+    número, ele deve vir de uma consulta feita pela tool — não estime ou invente
+    valores.
+    Sempre responda em português-BR.
+  expected_output: >
+    Um relatório estruturado contendo: (1) mapa do funil com as etapas e métricas
+    reais associadas a cada uma (extraídas via consulta ao banco); (2) lista
+    priorizada de dores, desejos e objeções do avatar; (3) pontos de atrito
+    identificados, com os números que os embasam; (4) hipóteses de teste
+    sugeridas para as próximas campanhas.
+  agent: strategy_analyst
+
+criacao_copy_persuasiva:
+  description: >
+    Com base no diagnóstico estratégico do funil, produza os textos persuasivos
+    necessários para a campanha de {produto_ou_servico}, incluindo: headline e
+    hook de abertura, corpo de copy para anúncio, roteiro de vídeo de alta retenção
+    (se aplicável) e texto de landing page com CTA orientado à conversão. Utilize
+    gatilhos mentais e técnicas de resposta direta alinhadas às dores e desejos
+    levantados na análise estratégica, adaptando o tom de voz ao público de
+    {nicho_ou_mercado}.
+    Sempre responda em português-BR.
+  expected_output: >
+    Um documento de copy completo contendo: headline principal e 2 variações
+    alternativas; corpo de copy para anúncio (versões curta e longa); roteiro de
+    vídeo com marcação de tempo/blocos (gancho, desenvolvimento, CTA); e texto de
+    landing page dividido por seções (hero, benefícios, prova social, objeções, CTA final).
+  agent: copywriter
+  context:
+    - analise_estrategica_funil
+
+direcao_visual_criativos:
+  description: >
+    Desenvolva o direcionamento visual e os conceitos de criativos para a campanha
+    de {produto_ou_servico}, traduzindo a copy e a estratégia de funil em peças
+    visuais coerentes. Defina paleta de cores, hierarquia visual e estilo de
+    tipografia alinhados ao posicionamento da marca, e proponha layouts para
+    anúncios estáticos, criativos em vídeo/carrossel e a landing page, garantindo
+    consistência visual em todos os pontos de contato do funil.
+    Sempre responda em português-BR.
+  expected_output: >
+    Um guia de direção de arte contendo: paleta de cores e racional de uso;
+    diretrizes de tipografia e hierarquia visual; wireframes ou descrições
+    detalhadas de layout para cada formato de criativo (estático, vídeo/carrossel,
+    landing page); e recomendações de composição visual para maximizar a
+    conversão em cada etapa do funil.
+  agent: visual_designer
+  context:
+    - analise_estrategica_funil
+    - criacao_copy_persuasiva
+
+planejamento_campanha_trafego:
+  description: >
+    Estruture o plano de campanha de tráfego pago para {produto_ou_servico} nas
+    plataformas mais relevantes para {nicho_ou_mercado} (Meta Ads, Google Ads
+    e/ou TikTok Ads), utilizando a copy e os criativos definidos anteriormente.
+    Defina segmentação de públicos, estrutura de campanhas/conjuntos/anúncios,
+    orçamento sugerido, estratégia de lances, cronograma de testes A/B e as
+    métricas-chave (KPIs) que serão monitoradas para atingir {objetivo_campanha}
+    com o menor CPA possível e o melhor ROAS. Use os benchmarks reais de CPA,
+    ROAS e CTR extraídos de meta_ads_campaigns na análise estratégica como
+    referência para definir metas realistas — não estime esses valores do zero.
+    Sempre responda em português-BR.
+  expected_output: >
+    Um plano de mídia detalhado contendo: estrutura de campanhas por plataforma
+    (campanha > conjunto de anúncios > anúncio); definição de públicos e
+    segmentações (frio, morno, quente/remarketing); orçamento sugerido por
+    etapa do funil; cronograma de testes A/B de criativos e públicos; e uma
+    tabela de KPIs-alvo (CPA, ROAS, CTR, taxa de conversão) para acompanhamento.
+  agent: media_buyer
+  context:
+    - analise_estrategica_funil
+    - criacao_copy_persuasiva
+    - direcao_visual_criativos
